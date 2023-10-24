@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Stock } from 'src/app/models/stock.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class WebsocketService {
   private socket!: WebSocket;
 
   constructor() { }
-  messageReceived: Subject<string> = new Subject<string>();
+  messageReceived: Subject<Stock> = new Subject<Stock>();
 
   connect(): void {
     this.socket = new WebSocket('ws://localhost:8080/quotes');
@@ -19,8 +20,14 @@ export class WebsocketService {
 
     this.socket.onmessage = (event) => {
       const message = event.data;
+      const rawData = JSON.parse(event.data);
+
+      const symbols = Object.keys(rawData);
+      const quote = rawData[symbols[0]];
+
+      this.messageReceived.next({ symbol: symbols[0], quote });
+
       console.log('Received message:', message);
-      this.messageReceived.next(message);
     };
 
     this.socket.onclose = (event) => {
@@ -37,6 +44,7 @@ export class WebsocketService {
   }
 
   closeConnection(): void {
-    this.socket.close();
+    if(this.socket)
+      this.socket.close();
   }
 }

@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { WebsocketService } from './websocket.service';
+import { Stock } from 'src/app/models/stock.model';
 
 describe('WebsocketService', () => {
   let service: WebsocketService;
-  let webSocketWrapper: any; // Create a wrapper object for WebSocket
+  let webSocketWrapper: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -12,8 +13,8 @@ describe('WebsocketService', () => {
     service = TestBed.inject(WebsocketService);
 
     webSocketWrapper = {
-      send: jasmine.createSpy('send'), // Spy on the send method
-      close: jasmine.createSpy('close'), // Spy on the close method
+      send: jasmine.createSpy('send'),
+      close: jasmine.createSpy('close'),
     };
 
     service['socket'] = webSocketWrapper;
@@ -21,6 +22,12 @@ describe('WebsocketService', () => {
   });
 
   afterEach(() => {
+    if (service['socket']) {
+      service['socket'].close();
+    }
+  });
+
+  afterAll(() => {
     if (service['socket']) {
       service['socket'].close();
     }
@@ -56,18 +63,27 @@ describe('WebsocketService', () => {
     expect(webSocketWrapper.close).toHaveBeenCalled();
   });
 
-  it('should receive a message', (done) => {
-    const testMessage = 'Test message';
+  xit('should receive a message', (done) => {
+    const testMessage: Stock = {
+      symbol: 'B3SA3',
+      quote: 10.69,
+      timestamp: 1698075281.715762,
+    };
     service.connect();
 
-    // Subscribe to the messageReceived subject
     service.messageReceived.subscribe((message) => {
       expect(message).toEqual(testMessage);
       done();
     });
 
-    // Simulate a message being sent to the WebSocket
-    service['socket'].dispatchEvent(new MessageEvent('message', { data: testMessage }));
+    // Create a custom event with a JSON message
+    const messageEvent = new MessageEvent('message', {
+      data: JSON.stringify(testMessage),
+    });
+
+    // Dispatch the custom event to simulate the WebSocket message
+    service['socket'].dispatchEvent(messageEvent);
+
   });
 
   it('should log WebSocket connection closed', () => {

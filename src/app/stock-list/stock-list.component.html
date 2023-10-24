@@ -1,5 +1,9 @@
 <p>stock-list works!</p>
+<button mat-button (click)="disconnect()">disconnect</button>
+<button mat-button (click)="connect()">connect</button>
 
-<ul>
-    <li *ngFor="let message of receivedMessages">{{ message }}</li>
-</ul>
+<ol>
+    <li *ngFor="let stock of stocks">
+        <app-stock [stockData]="stock"></app-stock>
+    </li>
+</ol>
