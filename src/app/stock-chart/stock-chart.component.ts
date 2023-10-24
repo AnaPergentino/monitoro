@@ -4,7 +4,7 @@ import { StockService } from '../services/stock-service/stock.service';
 @Component({
   selector: 'app-stock-chart',
   templateUrl: './stock-chart.component.html',
-  styleUrls: ['./stock-chart.component.sass']
+  styleUrls: ['./stock-chart.component.scss']
 })
 export class StockChartComponent {
   @Input()

@@ -6,7 +6,7 @@ import { StockService } from '../services/stock-service/stock.service';
 @Component({
   selector: 'app-stock-list',
   templateUrl: './stock-list.component.html',
-  styleUrls: ['./stock-list.component.sass'],
+  styleUrls: ['./stock-list.component.scss'],
 })
 export class StockListComponent {
   constructor(

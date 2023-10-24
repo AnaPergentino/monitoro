@@ -10,6 +10,7 @@ import { StockComponent } from './stock/stock.component';
 import { StockChartComponent } from './stock-chart/stock-chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const config: SocketIoConfig = { url: 'ws://localhost:8080', options: {} };
 
@@ -25,7 +26,8 @@ const config: SocketIoConfig = { url: 'ws://localhost:8080', options: {} };
     AppRoutingModule,
     SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

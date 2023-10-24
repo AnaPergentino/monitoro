@@ -1,9 +1,8 @@
-<p>stock-list works!</p>
 <button mat-button (click)="disconnect()">disconnect</button>
 <button mat-button (click)="connect()">connect</button>
+<div fxLayout.xs="column" fxLayout.gt-xs="row wrap" fxLayoutGap="16px">
 
-<ol>
-    <li *ngFor="let stock of stocks">
-        <app-stock [stockData]="stock"></app-stock>
-    </li>
-</ol>
+    <div *ngFor="let stock of stocks">
+        <app-stock [stockData]="stock" fxFlex.gt-xs="25%"></app-stock>
+    </div>
+</div>
