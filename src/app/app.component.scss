@@ -2,3 +2,27 @@
     background: #091827;
     height: 80px;
 }
+
+.container {
+    margin: 80px;
+    @media screen and (max-width: 767px) {
+        margin: 12px;
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sorting-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-left: 80px;
+    @media screen and (max-width: 767px) {
+        margin: 12px;
+    }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Stock } from './../../models/stock.model'
+import { Observable, Subject } from 'rxjs';
+import { Stock } from './../../models/stock.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,10 @@ export class StockService {
   private stocks: Stock[] = [];
   private stocksSubject: Subject<Stock[]> = new Subject<Stock[]>();
   private pastQuotes: Map<string, number[]> = new Map<string, number[]>();
+  private pastQuotesSubjects: Map<
+    string,
+    Subject<{ symbol: string; quotes: number[] }>
+  > = new Map();
 
   getStocks() {
     return this.stocksSubject.asObservable();
@@ -17,19 +21,28 @@ export class StockService {
   getPastQuotes(symbol: string): number[] {
     return this.pastQuotes.get(symbol) || [];
   }
-
+  getPastQuotesObservable(
+    symbol: string
+  ): Observable<{ symbol: string; quotes: number[] }> {
+    if (!this.pastQuotesSubjects.has(symbol)) {
+      this.pastQuotesSubjects.set(
+        symbol,
+        new Subject<{ symbol: string; quotes: number[] }>()
+      );
+    }
+    return this.pastQuotesSubjects.get(symbol)!.asObservable();
+  }
   updateStocks(newStockData: { symbol: string; quote: number }) {
-    const existingStockIndex = this.stocks.findIndex((stock) => stock.symbol === newStockData.symbol);
+    const existingStockIndex = this.stocks.findIndex(
+      (stock) => stock.symbol === newStockData.symbol
+    );
 
     if (existingStockIndex !== -1) {
-      // Update the current quote.
       this.stocks[existingStockIndex].quote = newStockData.quote;
     } else {
-      // Create a new stock entry.
       this.stocks.push(newStockData);
     }
 
-    // Update historical quotes.
     this.updatePastQuotes(newStockData);
 
     this.stocksSubject.next(this.stocks);
@@ -39,18 +52,28 @@ export class StockService {
     const symbol = newStockData.symbol;
     const quote = newStockData.quote;
 
-    // Get the current historical quotes for the stock or create an empty array if it doesn't exist.
     let quotes = this.pastQuotes.get(symbol) || [];
 
-    // Add the new quote to the beginning of the array.
-    quotes.unshift(quote);
+    quotes.push(quote);
 
-    // Keep only the last 10 quotes.
-    if (quotes.length > 10) {
-      quotes.pop();
+    if (quotes.length > 20) {
+      quotes.shift();
     }
 
-    // Update the historical quotes for the stock.
     this.pastQuotes.set(symbol, quotes);
+
+    if (this.pastQuotesSubjects.has(symbol)) {
+      this.pastQuotesSubjects.get(symbol)!.next({ symbol, quotes });
+    }
+  }
+
+  // Sort stocks by ascending value
+  sortAscending() {
+    this.stocks.sort((a, b) => a.quote - b.quote);
+  }
+
+  // Sort stocks by descending value
+  sortDescending() {
+    this.stocks.sort((a, b) => b.quote - a.quote);
   }
 }

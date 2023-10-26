@@ -11,6 +11,8 @@ import { StockChartComponent } from './stock-chart/stock-chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxApexchartsModule } from 'ngx-apexcharts';
+import { NgChartsModule } from 'ng2-charts';
 
 const config: SocketIoConfig = { url: 'ws://localhost:8080', options: {} };
 
@@ -27,7 +29,9 @@ const config: SocketIoConfig = { url: 'ws://localhost:8080', options: {} };
     SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxApexchartsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

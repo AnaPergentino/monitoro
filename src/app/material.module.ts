@@ -3,6 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSidenavModule} from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -10,7 +13,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule
   ],
 })
 export class MaterialModule {}

@@ -1,1 +1,4 @@
-<div *ngFor="let quote of historicalQuotes"> {{quote}} </div>
+<div style="display: block;">
+    <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="chartLegend" [type]="'line'">
+  </canvas>
+</div>

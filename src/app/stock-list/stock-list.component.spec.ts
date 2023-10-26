@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StockListComponent } from './stock-list.component';
 import { WebsocketService } from '../services/websocket-service/websocket.service';
 import { StockService } from '../services/stock-service/stock.service';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 describe('StockListComponent', () => {
   let component: StockListComponent;
@@ -12,7 +14,8 @@ describe('StockListComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [StockListComponent],
-      providers:[WebsocketService, StockService]
+      providers: [WebsocketService, StockService],
+      imports: [MatChipsModule, MatProgressSpinnerModule]
     });
     fixture = TestBed.createComponent(StockListComponent);
     component = fixture.componentInstance;

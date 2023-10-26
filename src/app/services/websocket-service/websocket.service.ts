@@ -19,7 +19,6 @@ export class WebsocketService {
     };
 
     this.socket.onmessage = (event) => {
-      const message = event.data;
       const rawData = JSON.parse(event.data);
 
       const symbols = Object.keys(rawData);
@@ -27,7 +26,6 @@ export class WebsocketService {
 
       this.messageReceived.next({ symbol: symbols[0], quote });
 
-      console.log('Received message:', message);
     };
 
     this.socket.onclose = (event) => {

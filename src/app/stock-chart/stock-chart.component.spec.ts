@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StockChartComponent } from './stock-chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 describe('StockChartComponent', () => {
   let component: StockChartComponent;
@@ -8,7 +9,8 @@ describe('StockChartComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StockChartComponent]
+      declarations: [StockChartComponent],
+      imports: [NgChartsModule]
     });
     fixture = TestBed.createComponent(StockChartComponent);
     component = fixture.componentInstance;

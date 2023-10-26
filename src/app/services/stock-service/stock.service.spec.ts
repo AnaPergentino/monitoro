@@ -6,11 +6,62 @@ describe('StockService', () => {
   let service: StockService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [StockService],
+    });
     service = TestBed.inject(StockService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+
+  it('should update stocks', () => {
+    const stockData = { symbol: 'AAPL', quote: 150 };
+    service.updateStocks(stockData);
+
+    const stocks = service.getStocks();
+    stocks.subscribe((stockList) => {
+      expect(stockList).toContain(stockData);
+    });
+  });
+
+  it('should update past quotes when stocks are updated', () => {
+    const stockData = { symbol: 'GOOG', quote: 2500 };
+    service.updateStocks(stockData);
+
+    const pastQuotes = service.getPastQuotes(stockData.symbol);
+    expect(pastQuotes).toEqual([stockData.quote]);
+  });
+
+  it('should sort stocks in ascending order', () => {
+    const stockData = { symbol: 'MSFT', quote: 300 };
+    const stockData2 = { symbol: 'AMZN', quote: 3400 };
+
+    service.updateStocks(stockData);
+    service.updateStocks(stockData2);
+
+    service.sortAscending();
+    const stocks = service.getStocks();
+
+    stocks.subscribe((stockList) => {
+      expect(stockList[0].quote).toBeLessThanOrEqual(stockList[1].quote);
+    });
+  });
+
+  it('should sort stocks in descending order', () => {
+    const stockData = { symbol: 'FB', quote: 350 };
+    const stockData2 = { symbol: 'NFLX', quote: 550 };
+
+    service.updateStocks(stockData);
+    service.updateStocks(stockData2);
+
+    service.sortDescending();
+    const stocks = service.getStocks();
+
+    stocks.subscribe((stockList) => {
+      expect(stockList[0].quote).toBeGreaterThanOrEqual(stockList[1].quote);
+    });
   });
 });

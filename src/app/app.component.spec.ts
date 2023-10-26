@@ -3,10 +3,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { StockListComponent } from './stock-list/stock-list.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule, MatToolbarModule],
+    imports: [RouterTestingModule, MatToolbarModule, MatChipsModule, MatProgressSpinnerModule],
     declarations: [AppComponent, StockListComponent]
   }));
 
