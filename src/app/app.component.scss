@@ -10,16 +10,6 @@
     }
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.sorting-buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
 .logo {
     margin-left: 80px;
     @media screen and (max-width: 767px) {

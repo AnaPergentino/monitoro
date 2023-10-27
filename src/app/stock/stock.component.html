@@ -1,12 +1,37 @@
 <mat-card class="custom-card">
-    <mat-card-content>
+    <mat-card-content style="padding: unset">
         <img src="assets/Eletropaulo_Logo.png" alt="Eletropaulo Logo" />
 
-        <p>AES Eletropaulo
-            <span class="stock-symbol">{{stockData.symbol}}</span> </p>
+        <p>
+            AES Eletropaulo <span class="stock-symbol">{{ stockData.symbol }}</span>
+        </p>
         <p>PREÇO DO ATIVO</p>
-        <p class="stock-quote">R$: {{ stockData.quote | number: '1.2-2' }}</p>
-
+        <span [ngStyle]="
+        stockTrend === 'down'
+          ? { color: 'var(--Red, #F44336)' }
+          : stockTrend === 'up'
+          ? { color: 'var(--Green, #00C853)' }
+          : {}
+      ">
+      <p class="stock-quote">
+        R$ {{ stockData.quote | number : "1.2-2" }}
+        <span [ngSwitch]="stockTrend" >
+          <span *ngSwitchCase="'up'"
+            ><mat-icon class="arrow"
+                aria-hidden="false"
+                aria-label="Em alta"
+                fontIcon="arrow_upward"
+              ></mat-icon>
+          </span>
+        <span *ngSwitchCase="'down'"><mat-icon class="arrow"
+              aria-hidden="false"
+              aria-label="Em baixa"
+              fontIcon="arrow_downward"
+            ></mat-icon>
+          </span>
+        </span>
+        </p>
+        </span>
         <app-stock-chart [symbol]="stockData.symbol"></app-stock-chart>
     </mat-card-content>
 </mat-card>

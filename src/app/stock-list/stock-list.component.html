@@ -1,7 +1,7 @@
 <div class="header">
     <h1>Explore o mercado</h1>
     <div class="sorting-buttons">
-        <p>Ordenar:</p>
+        <span>Ordenar:</span>
         <mat-chip-listbox aria-label="Ordenar">
             <mat-chip-option (click)="sortDescending()">Em Alta</mat-chip-option>
             <mat-chip-option (click)="sortAscending()">Em Baixa</mat-chip-option>
@@ -9,12 +9,9 @@
     </div>
 </div>
 
-<button mat-button (click)="disconnect()">disconnect</button>
-<button mat-button (click)="connect()">connect</button>
 <mat-spinner *ngIf="!isThereDataToCharts()"></mat-spinner>
-<div *ngIf="isThereDataToCharts()">
-    <div *ngFor="let stock of stocks">
+<div *ngIf="isThereDataToCharts()" class="stock-list-container">
+    <div *ngFor="let stock of stocks" class="stock-list-item">
         <app-stock [stockData]="stock"></app-stock>
     </div>
-
 </div>

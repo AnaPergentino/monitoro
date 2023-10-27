@@ -48,7 +48,7 @@ export class StockService {
     this.stocksSubject.next(this.stocks);
   }
 
-  private updatePastQuotes(newStockData: { symbol: string; quote: number }) {
+  updatePastQuotes(newStockData: { symbol: string; quote: number }) {
     const symbol = newStockData.symbol;
     const quote = newStockData.quote;
 
@@ -67,13 +67,30 @@ export class StockService {
     }
   }
 
-  // Sort stocks by ascending value
   sortAscending() {
     this.stocks.sort((a, b) => a.quote - b.quote);
   }
 
-  // Sort stocks by descending value
   sortDescending() {
     this.stocks.sort((a, b) => b.quote - a.quote);
   }
+
+  determineStockTrend(symbol: string, currentQuote: number): 'up' | 'down' | 'unchanged' {
+    const pastQuotes = this.getPastQuotes(symbol);
+console.log(pastQuotes.length)
+    if (pastQuotes.length <= 2) {
+      return 'unchanged';
+    }
+
+    const lastQuote = pastQuotes[pastQuotes.length - 2];
+console.log(lastQuote, currentQuote)
+    if (currentQuote > lastQuote) {
+      return 'up';
+    } else if (currentQuote < lastQuote) {
+      return 'down';
+    } else {
+      return 'unchanged';
+    }
+  }
+
 }

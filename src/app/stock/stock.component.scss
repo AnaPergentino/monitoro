@@ -1,4 +1,30 @@
 .custom-card {
-    width: 300px;
-    height: 300px;
+    width: 296px;
+    height: 290px;
+}
+
+
+/* Styles for "down" stock quotes */
+
+.stock-down {
+    color: var(--Red, #F44336);
+}
+
+
+/* Styles for "up" stock quotes */
+
+.stock-up {
+    color: var(--Green, #00C853);
+}
+
+.stock-quote {
+    font-family: DIN Pro;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.arrow {
+    font-size: 12px;
 }

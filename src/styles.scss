@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+    font-family: 'DIN Pro';
+    src: url('/assets/fonts/D-DIN-PRO-400-Regular.otf') format('opentype');
+    /* Adjust the path and font file name as needed */
+    font-weight: 400;
+    /* Adjust the weight as needed */
+    font-style: normal;
+    /* Adjust the style as needed */
+}
+
 h1 {
     color: #091827;
     font-family: DIN Pro;
@@ -7,4 +17,8 @@ h1 {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+body {
+    margin: 0
 }
