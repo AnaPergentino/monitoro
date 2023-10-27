@@ -56,7 +56,7 @@ export class StockService {
 
     quotes.push(quote);
 
-    if (quotes.length > 20) {
+    if (quotes.length > 10) {
       quotes.shift();
     }
 
@@ -80,7 +80,7 @@ export class StockService {
     currentQuote: number
   ): 'up' | 'down' | 'unchanged' {
     const pastQuotes = this.getPastQuotes(symbol);
-    if (pastQuotes.length <= 2) {
+    if (pastQuotes.length < 2) {
       return 'unchanged';
     }
 

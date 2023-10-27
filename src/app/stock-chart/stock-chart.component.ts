@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { StockService } from '../services/stock-service/stock.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stock-chart',
@@ -14,6 +14,7 @@ export class StockChartComponent {
   pastQuotes: number[] = [];
   pastQuotes$: Observable<{ symbol: string; quotes: number[] }> =
     new Observable();
+  pastQuotesSubscription: Subscription | undefined;
 
   public chartData: any[] = [
     {
@@ -62,11 +63,18 @@ export class StockChartComponent {
     this.updateChartData(this.pastQuotes);
 
     this.pastQuotes$ = this.stockService.getPastQuotesObservable(this.symbol);
-    this.pastQuotes$.subscribe((pastQuotes) => {
+    this.pastQuotesSubscription = this.pastQuotes$.subscribe((pastQuotes) => {
       this.pastQuotes = pastQuotes.quotes;
       this.updateChartData(this.pastQuotes);
     });
   }
+
+  ngOnDestroy() {
+    if (this.pastQuotesSubscription) {
+      this.pastQuotesSubscription.unsubscribe();
+    }
+  }
+
   updateChartData(newData: any) {
     this.chartData = [{ data: newData }];
   }

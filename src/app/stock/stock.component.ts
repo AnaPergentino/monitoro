@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StockService } from '../services/stock-service/stock.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stock',
@@ -13,6 +13,7 @@ export class StockComponent implements OnInit {
   stockTrend!: string;
   pastQuotes$: Observable<{ symbol: string; quotes: number[] }> =
     new Observable();
+     pastQuotesSubscription: Subscription | undefined;
 
   constructor(private stockService: StockService) {
 
@@ -21,7 +22,7 @@ export class StockComponent implements OnInit {
   ngOnInit() {
 
     this.pastQuotes$ = this.stockService.getPastQuotesObservable(this.stockData.symbol);
-    this.pastQuotes$.subscribe(() => {
+    this.pastQuotesSubscription = this.pastQuotes$.subscribe(() => {
       this.handleStockDataChange()
     });
 
@@ -35,6 +36,12 @@ export class StockComponent implements OnInit {
         this.stockData?.quote
       );
 
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.pastQuotesSubscription) {
+      this.pastQuotesSubscription.unsubscribe();
     }
   }
 }
