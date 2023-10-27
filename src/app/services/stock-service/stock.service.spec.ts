@@ -69,19 +69,14 @@ describe('StockService', () => {
     const symbol = 'AAPL';
     const quote = 100;
 
-    // Get the initial length of pastQuotes
     const initialLength = service.getPastQuotes(symbol).length;
 
-    // Call the method to update pastQuotes
     service.updatePastQuotes({ symbol, quote });
 
-    // Get the length of pastQuotes after the update
     const updatedLength = service.getPastQuotes(symbol).length;
 
-    // Expect the length to be incremented by 1
     expect(updatedLength).toEqual(initialLength + 1);
 
-    // Check if the last element in pastQuotes is the new quote
     const lastValue = service.getPastQuotes(symbol)[updatedLength - 1];
     expect(lastValue).toEqual(quote);
   });

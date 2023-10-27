@@ -2,7 +2,7 @@
 
 # MoniToro -  Stock Quote Monitor
 
-![Stock Monitor](stock-monitor-screenshot.png) 
+![Stock Monitor](https://github.com/AnaPergentino/monitoro/blob/main/screenshot/MoniToro-screenshot.png) 
 
 The Monitoro - Stock Quote Monitor is a web application that allows users to track stock market quotes using interactive graphs.
 
