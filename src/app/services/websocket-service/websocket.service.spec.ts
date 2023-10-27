@@ -38,7 +38,7 @@ describe('WebsocketService', () => {
   });
 
   it('should establish a WebSocket connection', (done) => {
-    // Use a spy to mock the WebSocket constructor
+    // spy to mock the WebSocket constructor
     const webSocketConstructorSpy = spyOn(window, 'WebSocket').and.callThrough();
 
     service.connect();
@@ -76,12 +76,10 @@ describe('WebsocketService', () => {
       done();
     });
 
-    // Create a custom event with a JSON message
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify(testMessage),
     });
 
-    // Dispatch the custom event to simulate the WebSocket message
     service['socket'].dispatchEvent(messageEvent);
 
   });
