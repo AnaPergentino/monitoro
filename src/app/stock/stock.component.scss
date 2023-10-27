@@ -1,17 +1,15 @@
 .custom-card {
     width: 296px;
     height: 290px;
+    border: 1px solid #D1D5D7;
+    border-radius: 0;
+    box-shadow: none;
+    border-width: 1px
 }
-
-
-/* Styles for "down" stock quotes */
 
 .stock-down {
     color: var(--Red, #F44336);
 }
-
-
-/* Styles for "up" stock quotes */
 
 .stock-up {
     color: var(--Green, #00C853);
@@ -27,4 +25,24 @@
 
 .arrow {
     font-size: 12px;
+    vertical-align: middle;
+}
+
+.card-text {
+    margin-left: 40px;
+    margin-top: 32px;
+    margin-right: 40px;
+}
+
+.card-stock-symbol {
+    color: #7E868E;
+    font-family: DIN Pro;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
 }

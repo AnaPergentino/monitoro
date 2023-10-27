@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+$primary: mat-palette(#00ADD2, 200);
+$theme: mat-light-theme($primary);
 @font-face {
     font-family: 'DIN Pro';
     src: url('/assets/fonts/D-DIN-PRO-400-Regular.otf') format('opentype');
@@ -10,9 +12,19 @@
     /* Adjust the style as needed */
 }
 
+@font-face {
+    font-family: 'DIN Pro Bold';
+    src: url('/assets/fonts/D-DIN-PRO-700-Bold.otf') format('opentype');
+    /* Adjust the path and font file name as needed */
+    font-weight: 600;
+    /* Adjust the weight as needed */
+    font-style: normal;
+    /* Adjust the style as needed */
+}
+
 h1 {
     color: #091827;
-    font-family: DIN Pro;
+    font-family: DIN Pro Bold;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;

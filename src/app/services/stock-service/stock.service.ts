@@ -75,15 +75,16 @@ export class StockService {
     this.stocks.sort((a, b) => b.quote - a.quote);
   }
 
-  determineStockTrend(symbol: string, currentQuote: number): 'up' | 'down' | 'unchanged' {
+  determineStockTrend(
+    symbol: string,
+    currentQuote: number
+  ): 'up' | 'down' | 'unchanged' {
     const pastQuotes = this.getPastQuotes(symbol);
-console.log(pastQuotes.length)
     if (pastQuotes.length <= 2) {
       return 'unchanged';
     }
 
     const lastQuote = pastQuotes[pastQuotes.length - 2];
-console.log(lastQuote, currentQuote)
     if (currentQuote > lastQuote) {
       return 'up';
     } else if (currentQuote < lastQuote) {
@@ -92,5 +93,4 @@ console.log(lastQuote, currentQuote)
       return 'unchanged';
     }
   }
-
 }

@@ -4,7 +4,10 @@
 }
 
 .container {
-    margin: 80px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 54px;
+    margin-bottom: 54px;
     @media screen and (max-width: 767px) {
         margin: 12px;
     }

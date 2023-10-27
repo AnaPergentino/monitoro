@@ -34,7 +34,7 @@ export class StockComponent implements OnInit {
         this.stockData?.symbol,
         this.stockData?.quote
       );
-      console.log(this.stockTrend);
+
     }
   }
 }
